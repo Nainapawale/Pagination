@@ -1,0 +1,83 @@
+
+.pagination-container {
+  text-align: left;
+  max-width: 600px;
+  margin: auto;
+  background:linear-gradient(teal, white) ;
+}
+
+.mcq-list {
+  list-style-type: none;
+  padding: 0;
+  margin:10px;
+}
+
+.mcq-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.mcq-item h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.option-list {
+  list-style-type: none;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  gap: 15px; 
+  margin-bottom: 8px;
+  padding: 8px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.option-item:hover {
+  background-color: #f0f8ff;
+}
+
+input[type="radio"] {
+  margin-right: 8px; 
+  transform: scale(1.2);
+}
+
+.pagination-buttons {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.pagination-buttons button {
+  margin: 5px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.pagination-buttons button:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+.pagination-buttons button.active {
+  background-color: #007BFF;
+  color: white;
+  font-weight: bold;
+}

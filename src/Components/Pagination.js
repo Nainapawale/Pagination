@@ -1,70 +1,86 @@
 import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./Pagination.css";
 
-const Pagination = ({ itemsPerPage, items }) => {
+const Pagination = ({ imagesPerPage, images }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(images.length / imagesPerPage);
 
-  const totalPages = Math.ceil(items.length / itemsPerPage);
-
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
+  const indexOfLastItem = currentPage * imagesPerPage;
+  const indexOfFirstItem = indexOfLastItem - imagesPerPage;
+  const currentImages = images.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
+    if (pageNumber >= 1 && pageNumber <= totalPages) {
+      setCurrentPage(pageNumber);
+    }
   };
 
   return (
-    //  MCQS
-    <div  className="pagination-container" >
-      <ul className="mcq-list">
-        {currentItems.map((item, index) => {
-          const [question, ...options] = item.split(" A) ");
-          return (
-            <li
-              key={index} className="mcq-list"
-              
-            >
-              <h3 >
-                {question}
-              </h3>
+    <div className="container p-4">
+      <h2 className="text-center fw-bold text-primary mb-4">
+        📸 Beautiful Image Gallery
+      </h2>
 
-              <ul className="option-list">
-                {options.map((option, i) => (
-                  <li
-                    key={i} className="option-item" 
-                  >
-                    <input
-                      type="radio"
-                      name={`q${index}`}
-                      id={`q${index}-option${i}`}
-                    />
-
-                    <label
-                      htmlFor={`q${index}-option${i}`}>
-                    
-                      {String.fromCharCode(65 + i)}) {option}
-                    </label>
-                  </li>
-                ))}
-              </ul>
-            </li>
-          );
-        })}
-      </ul>
-
-      {/* BUTTONS */}
-      <div  className="pagination-buttons">
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index}
-            onClick={() => handlePageChange(index + 1)}
-            className={currentPage === index + 1 ? "active" : ""}
-          >
-            {index + 1}
-          </button>
-        ))}
+      {/* Image Grid */}
+      <div className="container text-center">
+        <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3">
+          {currentImages.map((image, index) => (
+            <div key={index} className="col">
+              <div className="card shadow-lg border-0 rounded overflow-hidden image-card">
+                <img
+                  src={image}
+                  alt={`Image ${index + 1}`}
+                  className="card-img-top"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
+
+      {/* Pagination */}
+      <nav aria-label="Page navigation" className="mt-4">
+        <ul className="pagination justify-content-center">
+          <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+            <button
+              className="page-link pagination-btn"
+              onClick={() => handlePageChange(currentPage - 1)}
+            >
+              &laquo;
+            </button>
+          </li>
+
+          {Array.from({ length: totalPages }, (_, index) => (
+            <li
+              key={index}
+              className={`page-item ${
+                currentPage === index + 1 ? "active" : ""
+              }`}
+            >
+              <button
+                className="page-link pagination-btn"
+                onClick={() => handlePageChange(index + 1)}
+              >
+                {index + 1}
+              </button>
+            </li>
+          ))}
+
+          <li
+            className={`page-item ${
+              currentPage === totalPages ? "disabled" : ""
+            }`}
+          >
+            <button
+              className="page-link pagination-btn"
+              onClick={() => handlePageChange(currentPage + 1)}
+            >
+              &raquo;
+            </button>
+          </li>
+        </ul>
+      </nav>
     </div>
   );
 };

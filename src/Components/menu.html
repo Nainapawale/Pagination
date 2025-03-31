@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - DineX</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="mt-4">Welcome, <span id="username"></span>! Here is the Menu</h2>
+
+        <!-- Display Menu Items -->
+        <div class="row" id="menuContainer">
+            <!-- Menu items will be dynamically added here using JavaScript -->
+        </div>
+
+        <!-- Logout Button -->
+        <div class="mt-4">
+            <a href="LogoutServlet" class="btn btn-danger">Logout</a>
+        </div>
+    </div>
+
+    <script>
+        // Sample JavaScript to dynamically load data (replace this with actual AJAX call)
+        document.addEventListener("DOMContentLoaded", function () {
+            // Fetch the username from localStorage/sessionStorage or backend
+            document.getElementById("username").innerText = "User"; // Replace with actual username
+
+            // Sample menu items array (replace with fetched data)
+            const menuItems = [
+                { id: 1, name: "Pizza", image: "pizza.jpg", price: 12.99, availability: true, home_delivery: true },
+                { id: 2, name: "Burger", image: "burger.jpg", price: 8.99, availability: false, home_delivery: true },
+                { id: 3, name: "Pasta", image: "pasta.jpg", price: 10.49, availability: true, home_delivery: false }
+            ];
+
+            // Get menu container
+            const menuContainer = document.getElementById("menuContainer");
+
+            // Populate menu dynamically
+            menuItems.forEach(item => {
+                const menuItemHTML = `
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="img/${item.image}" class="card-img-top" alt="${item.name}">
+                            <div class="card-body">
+                                <h5 class="card-title">${item.name}</h5>
+                                <p class="card-text">Price: $${item.price}</p>
+                                <p>Available: ${item.availability ? "Yes" : "No"}</p>
+                                <p>Home Delivery: ${item.home_delivery ? "Yes" : "No"}</p>
+                                /* <form action="BookServlet" method="post">
+                                    <input type="hidden" name="item_id" value="${item.id}">
+                                    <button type="submit" class="btn btn-primary" ${item.availability ? "" : "disabled"}>Book It</button>
+                                </form> */
+                            </div>
+                        </div>
+                    </div>
+                `;
+                menuContainer.innerHTML += menuItemHTML;
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

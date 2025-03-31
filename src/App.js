@@ -8,7 +8,7 @@ const App = () => {
     "/assets/img22.jpg",
     "/assets/img6.jpg",
     "/assets/img7.jpg",
-    "/assets/img22.jpg"
+    "/assets/img22.jpg",
     "/assets/img6.jpg",
     "/assets/img7.jpg",
     "/assets/img22.jpg",
